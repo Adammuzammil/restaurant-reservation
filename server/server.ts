@@ -6,6 +6,7 @@ import { authRouter } from "./routes/auth.route.js";
 import { restaurantRouter } from "./routes/restaurant.route.js";
 import { bookingRouter } from "./routes/booking.route.js";
 import { ownerRouter } from "./routes/owner.route.js";
+import { adminRouter } from "./routes/admin.route.js";
 
 const app = express();
 
@@ -26,6 +27,7 @@ app.use("/api/auth", authRouter);
 app.use("/api/restaurants", restaurantRouter);
 app.use("/api/bookings", bookingRouter);
 app.use("/api/owner", ownerRouter);
+app.use("/api/admin", adminRouter);
 
 //Global error handler
 app.use((err: Error, req: Request, res: Response) => {
