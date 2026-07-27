@@ -1,5 +1,5 @@
 import "dotenv/config";
-import express, { Request, Response } from "express";
+import express, { NextFunction, Request, Response } from "express";
 import cors from "cors";
 import { connectDB } from "./config/db.js";
 import { authRouter } from "./routes/auth.route.js";
@@ -30,7 +30,7 @@ app.use("/api/owner", ownerRouter);
 app.use("/api/admin", adminRouter);
 
 //Global error handler
-app.use((err: Error, req: Request, res: Response) => {
+app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
   console.error("Unhandle Error:", err);
   res.status(500).json({
     message: err.message || "Internal Server Error",
