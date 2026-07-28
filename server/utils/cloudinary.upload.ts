@@ -1,6 +1,6 @@
 import { v2 as cloudinary } from "cloudinary";
 
-export const uploadToCloudinary = (
+const uploadToCloudinary = (
   fileBuffer: Buffer,
 ): Promise<{ secure_url: string }> => {
   return new Promise((resolve, reject) => {
@@ -15,3 +15,5 @@ export const uploadToCloudinary = (
     stream.end(fileBuffer);
   });
 };
+
+export default uploadToCloudinary;

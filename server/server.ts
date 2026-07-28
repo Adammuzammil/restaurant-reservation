@@ -1,4 +1,5 @@
 import "dotenv/config";
+import "./config/cloudinary.js";
 import express, { NextFunction, Request, Response } from "express";
 import cors from "cors";
 import { connectDB } from "./config/db.js";

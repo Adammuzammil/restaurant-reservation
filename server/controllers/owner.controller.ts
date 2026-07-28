@@ -1,8 +1,10 @@
 import { Response } from "express";
 import { AuthRequest } from "../middleware/auth.js";
 import { Restaurant } from "../models/restaurant.js";
-import { uploadToCloudinary } from "../utils/cloudinary.upload.js";
 import { Booking } from "../models/booking.js";
+import uploadToCloudinary from "../utils/cloudinary.upload.js";
+import cloudinary from "../config/cloudinary.js";
+import uploadToImageKit from "../utils/imagekit.upload.js";
 
 export const getOwnerRestaurant = async (req: AuthRequest, res: Response) => {
   try {
@@ -82,8 +84,11 @@ export const createOwnerRestaurant = async (
     // Handle image
     let imagerUrl = "";
     if (req.file) {
-      //handle image upload
-      const result = await uploadToCloudinary(req.file.buffer);
+      console.log(req.file);
+      const result = await uploadToImageKit(
+        req.file.buffer,
+        req.file.originalname,
+      );
       imagerUrl = result.secure_url;
     }
 
@@ -120,6 +125,8 @@ export const createOwnerRestaurant = async (
       owner: req.user?._id,
       status: "pending",
     });
+
+    res.status(201).json(restaurant);
   } catch (error: any) {
     console.error(error);
     res.status(400).json({ message: error.message });
