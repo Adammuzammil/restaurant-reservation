@@ -2,8 +2,6 @@ import { Response } from "express";
 import { AuthRequest } from "../middleware/auth.js";
 import { Restaurant } from "../models/restaurant.js";
 import { Booking } from "../models/booking.js";
-import uploadToCloudinary from "../utils/cloudinary.upload.js";
-import cloudinary from "../config/cloudinary.js";
 import uploadToImageKit from "../utils/imagekit.upload.js";
 
 export const getOwnerRestaurant = async (req: AuthRequest, res: Response) => {
@@ -186,7 +184,10 @@ export const updateOwnerRestaurant = async (
 
     //Handle new/updated image upload if any
     if (req.file) {
-      const result = await uploadToCloudinary(req.file.buffer);
+      const result = await uploadToImageKit(
+        req.file.buffer,
+        req.file.originalname,
+      );
       restaurant.image = result.secure_url;
     }
 
