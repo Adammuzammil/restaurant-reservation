@@ -62,6 +62,8 @@ export default function OwnerProfileDetails({
     }
   }, [restaurant]);
 
+  console.log("rest", restaurant);
+
   const toggleSlot = (slot: string) => {
     if (availableSlots.includes(slot)) {
       setAvailableSlots(availableSlots.filter((s) => s !== slot));
@@ -168,9 +170,10 @@ export default function OwnerProfileDetails({
             <div className="relative w-32 h-24 bg-surface border border-outline-variant/30 rounded-sm overflow-hidden shrink-0 flex items-center justify-center">
               {imagePreview ? (
                 <img
-                  src={imagePreview}
+                  src={imagePreview ? `${imagePreview}?tr=w-800` : undefined}
                   alt="Preview"
                   className="w-full h-full object-cover"
+                  onError={(e) => console.error("Image failed to load:", e)}
                 />
               ) : (
                 <Image size={24} className="text-black/30" />

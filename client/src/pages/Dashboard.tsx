@@ -146,7 +146,11 @@ export default function Dashboard() {
                       <div className="flex gap-4">
                         <div className="w-16 h-16 rounded-sm overflow-hidden shrink-0 bg-surface">
                           <img
-                            src={b.restaurant?.image}
+                            src={
+                              b.restaurant.image
+                                ? `${b.restaurant.image}?tr=w-800`
+                                : undefined
+                            }
                             alt={b.restaurant?.name}
                             className="w-full h-full object-cover"
                           />

@@ -65,7 +65,7 @@ export default function OwnerBookings({
                     {b.user?.name}
                   </h4>
                   <span className="text-[9px] text-black/50 border border-outline-variant/30 px-1.5 py-0.5">
-                    {b.bookingId}
+                    {b.bookingId.toUpperCase()}
                   </span>
                 </div>
                 <div className="flex flex-wrap items-center gap-x-4 gap-y-1 text-xs text-black/55">
